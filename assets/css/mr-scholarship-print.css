@@ -1,0 +1,208 @@
+/* assets/css/mr-scholarship-print.css */
+
+/* Print specific styles */
+@media print {
+    body {
+        font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .printable-content {
+        padding: 20px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+    }
+    
+    .header h2, .header h3 {
+        font-size: 14pt;
+    }
+    
+    .subject {
+        font-size: 12pt;
+    }
+    
+    .data-group {
+        page-break-inside: avoid;
+    }
+    
+    table {
+        width: 100%;
+        page-break-inside: auto;
+    }
+    
+    tr {
+        page-break-inside: avoid;
+    }
+    
+    thead {
+        display: table-header-group;
+    }
+    
+    tfoot {
+        display: table-footer-group;
+    }
+    
+    table, th, td {
+        border: 1px solid #000;
+    }
+    
+    th, td {
+        padding: 8px;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+    
+    /* Add page breaks where needed */
+    .form-section, .declaration {
+        page-break-inside: avoid;
+    }
+    
+    /* Ensure fonts render properly */
+    @font-face {
+        font-family: 'Noto Sans Devanagari';
+        src: local('Noto Sans Devanagari');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    /* Use system fonts if Noto Sans is unavailable */
+    body, table, .data-group, .header h2, .header h3 {
+        font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', Arial, sans-serif;
+    }
+    
+    /* Force background colors to print */
+    th {
+        background-color: #f2f2f2 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Print styles for address layout */
+    .address-layout {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        page-break-inside: avoid;
+    }
+
+    .municipality-type .radio-group {
+        display: inline;
+    }
+
+    .radio-option {
+        display: inline;
+        margin-right: 15px;
+    }
+
+    .radio-option input[type="radio"] {
+        margin-right: 3px;
+    }
+}
+
+/* General styles that apply to screen and print */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header h2, .header h3 {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+.recipient {
+    text-align: left;
+    margin-bottom: 15px;
+}
+.subject {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+    text-decoration: underline;
+}
+.salutation {
+    margin-bottom: 10px;
+}
+.data-group {
+    margin-bottom: 10px;
+}
+.data-group .label {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 180px;
+}
+.form-section {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+.value.block-letters {
+    text-transform: uppercase;
+}
+.declaration {
+    margin-top: 30px;
+}
+.signature-section {
+    margin-top: 20px;
+}
+
+/* Address layout for print */
+.address-display {
+    margin-bottom: 10px;
+}
+
+.address-display .label {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 80px;
+}
+
+.address-display .value {
+    display: inline-block;
+}
+
+/* Screen-only styles */
+@media screen {
+    .actions {
+        margin-top: 30px;
+        text-align: center;
+    }
+    .print-button, .back-button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+        border: none;
+    }
+    .print-button {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .back-button {
+        background-color: #555;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+    }
+}

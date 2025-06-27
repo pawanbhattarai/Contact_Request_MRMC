@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>महेन्द्ररत्न छात्रवृत्ति फारम</title>
+    <link rel="stylesheet" href="assets/css/mr-scholarship-style.css">
+    <link rel="stylesheet" href="assets/css/mr-scholarship-print.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="mr-scholarship-form">
+        <h2>महेन्द्ररत्न छात्रवृत्ति आवेदन फारम</h2>
+        
+        <form id="mr-scholarship-form" method="post" enctype="multipart/form-data">
+            <!-- Personal Information -->
+            <div class="input-group">
+                <label for="name_nepali">१ नाम (देवनागरीमा) <span class="required">*</span>:</label>
+                <input type="text" id="name_nepali" name="name_nepali" required>
+            </div>
+
+            <div class="input-group">
+                <label for="name_english">२ नाम (अंग्रेजीमा) <span class="required">*</span>:</label>
+                <input type="text" id="name_english" name="name_english" required>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="input-group">
+                <label>३ जन्म मिति (वि.स.) <span class="required">*</span>:</label>
+                <div class="academic-details">
+                    <span class="field-group">
+                        <label for="dob_year_bs">साल:</label>
+                        <input type="text" id="dob_year_bs" name="dob_year_bs" required 
+                               placeholder="२०८०" maxlength="4">
+                    </span>
+                    <span class="field-group">
+                        <label for="dob_month_bs">महिना:</label>
+                        <select id="dob_month_bs" name="dob_month_bs" required class="input-inline">
+                            <option value="">-- छान्नुहोस् --</option>
+                            <option value="बैशाख">बैशाख</option>
+                            <option value="जेठ">जेठ</option>
+                            <option value="असार">असार</option>
+                            <option value="साउन">साउन</option>
+                            <option value="भाद्र">भाद्र</option>
+                            <option value="असोज">असोज</option>
+                            <option value="कार्तिक">कार्तिक</option>
+                            <option value="मंसिर">मंसिर</option>
+                            <option value="पुष">पुष</option>
+                            <option value="माघ">माघ</option>
+                            <option value="फाल्गुन">फाल्गुन</option>
+                            <option value="चैत्र">चैत्र</option>
+                        </select>
+                    </span>
+                    <span class="field-group">
+                        <label for="dob_day_bs">दिन:</label>
+                        <input type="text" id="dob_day_bs" name="dob_day_bs" required 
+                               placeholder="१५" maxlength="2">
+                    </span>
+                </div>
+            </div>
+
+            <!-- Enhanced Address Section -->
+            <div class="input-group">
+                <label>४ ठेगाना <span class="required">*</span>:</label>
+                <div class="address-layout">
+                    <div class="address-field district">
+                        <label for="address_district">जिल्लाः</label>
+                        <input type="text" id="address_district" name="address_district" required>
+                    </div>
+                    
+                    <div class="address-field municipality-section">
+                        <div class="municipality-radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="municipality_napa" name="municipality_type" value="न.पा.">
+                                <label for="municipality_napa">न.पा.</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="municipality_gapa" name="municipality_type" value="गा.पा.">
+                                <label for="municipality_gapa">गा.पा.</label>
+                            </div>
+                        </div>
+                        <div class="municipality-input">
+                            <input type="text" id="address_municipality" name="address_municipality" required
+                                   placeholder="नाम लेख्नुहोस्">
+                        </div>
+                    </div>
+                    
+                    <div class="address-field ward">
+                        <label for="address_ward">वडा नं.:</label>
+                        <input type="text" id="address_ward" name="address_ward" required
+                               placeholder="१">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Family Information -->
+            <div class="input-group">
+                <label for="father_name">५ बुबाको नाम थर <span class="required">*</span>:</label>
+                <input type="text" id="father_name" name="father_name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="father_occupation">बुबाको पेशा:</label>
+                <input type="text" id="father_occupation" name="father_occupation">
+            </div>
+
+            <div class="input-group">
+                <label for="grandfather_name">हजुरबुबाको नाम थर:</label>
+                <input type="text" id="grandfather_name" name="grandfather_name">
+            </div>
+
+            <div class="input-group">
+                <label for="grandfather_occupation">हजुरबुबाको पेशा:</label>
+                <input type="text" id="grandfather_occupation" name="grandfather_occupation">
+            </div>
+
+            <!-- Academic Details with Dropdowns -->
+            <div class="input-group">
+                <label>६ शैक्षिक भर्ना विवरण <span class="required">*</span>:</label>
+                <div class="academic-details">
+                    <span class="field-group">
+                        <label for="faculty">संकायः</label>
+                        <select id="faculty" name="faculty" required class="input-inline">
+                            <option value="">-- छान्नुहोस् --</option>
+                            <option value="व्यवस्थापन">व्यवस्थापन</option>
+                            <option value="मानविकी">मानविकी</option>
+                            <option value="शिक्षाशास्त्र">शिक्षाशास्त्र</option>
+                            <option value="कानून">कानून</option>
+                            <option value="इन्जिनियरिङ">इन्जिनियरिङ</option>
+                            <option value="चिकित्सा">चिकित्सा</option>
+                        </select>
+                    </span>
+                    <span class="field-group">
+                        <label for="ac_level">तहः</label>
+                        <select id="ac_level" name="ac_level" required class="input-inline">
+                            <option value="">-- छान्नुहोस् --</option>
+                            <option value="स्नातक">स्नातक</option>
+                            <option value="स्नातकोत्तर">स्नातकोत्तर</option>
+                            <option value="डिप्लोमा">डिप्लोमा</option>
+                        </select>
+                    </span>
+                    <span class="field-group">
+                        <label for="ac_year">वर्षः</label>
+                        <select id="ac_year" name="ac_year" class="input-inline">
+                            <option value="">-- छान्नुहोस् --</option>
+                            <option value="पहिलो वर्ष">पहिलो वर्ष</option>
+                            <option value="दोस्रो वर्ष">दोस्रो वर्ष</option>
+                            <option value="तेस्रो वर्ष">तेस्रो वर्ष</option>
+                            <option value="चौथो वर्ष">चौथो वर्ष</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="input-group">
+                <label for="phone_no">७ सम्पर्क नम्बर <span class="required">*</span>:</label>
+                <input type="tel" id="phone_no" name="phone_no" required placeholder="९८४१२३४५६७">
+            </div>
+
+            <!-- Bank Information with Radio Buttons -->
+            <div class="input-group">
+                <label>८ बैंक विवरण:</label>
+                <div class="bank-selection">
+                    <div class="bank-options">
+                        <div class="bank-option">
+                            <input type="radio" id="bank_nabil" name="bank_name" value="नाबिल बैंक">
+                            <label for="bank_nabil">नाबिल बैंक</label>
+                        </div>
+                        <div class="bank-option">
+                            <input type="radio" id="bank_nic" name="bank_name" value="एनआईसी एशिया बैंक">
+                            <label for="bank_nic">एनआईसी एशिया बैंक</label>
+                        </div>
+                        <div class="bank-option">
+                            <input type="radio" id="bank_global" name="bank_name" value="ग्लोबल आईएमई बैंक">
+                            <label for="bank_global">ग्लोबल आईएमई बैंक</label>
+                        </div>
+                        <div class="bank-option">
+                            <input type="radio" id="bank_other" name="bank_name" value="अन्य">
+                            <label for="bank_other">अन्य</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="account_no">खाता नम्बर:</label>
+                <input type="text" id="account_no" name="account_no" placeholder="१२३४५६७८९०">
+            </div>
+
+            <!-- File Uploads -->
+            <div class="input-group">
+                <label>९ कागजातहरू:</label>
+                <div class="file-upload">
+                    <label for="document_1">नागरिकता प्रमाणपत्र:</label>
+                    <input type="file" id="document_1" name="document_1" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+                <div class="file-upload">
+                    <label for="document_2">शैक्षिक प्रमाणपत्र:</label>
+                    <input type="file" id="document_2" name="document_2" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+                <div class="file-upload">
+                    <label for="document_3">अन्य कागजात:</label>
+                    <input type="file" id="document_3" name="document_3" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+            </div>
+
+            <!-- Submit Section -->
+            <div class="submit-section">
+                <button type="submit" class="submit-btn" name="mr_scholarship_submit">आवेदन पेश गर्नुहोस्</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="assets/js/mr-scholarship-form.js"></script>
+</body>
+</html>
