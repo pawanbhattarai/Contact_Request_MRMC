@@ -135,6 +135,22 @@ function mr_scholarship_form_shortcode_handler()
             $feedback_message = esc_html__('Security check failed. Please try submitting again.', 'mr-scholarship');
             $message_class = 'error';
         } else {
+            // Check for duplicate submission
+            $name_nepali = sanitize_text_field($_POST['name_nepali']);
+            $roll_no = sanitize_text_field($_POST['roll_no']);
+            $faculty = sanitize_text_field($_POST['faculty']);
+            $ac_level = sanitize_text_field($_POST['ac_level']);
+            $ac_year = sanitize_text_field($_POST['ac_year']);
+            
+            $duplicate_check = $wpdb->get_row($wpdb->prepare(
+                "SELECT id FROM $table_name WHERE name_nepali = %s AND roll_no = %s AND faculty = %s AND ac_level = %s AND ac_year = %s",
+                $name_nepali, $roll_no, $faculty, $ac_level, $ac_year
+            ));
+            
+            if ($duplicate_check) {
+                $feedback_message = 'आवेदन अगाडिनै बरीसकिएको छ । फेरि आवेदन दिन असमर्थ छौ ।';
+                $message_class = 'error';
+            } else {
             // Process form data
             $data = array();
             $data['submission_time'] = current_time('mysql');
@@ -147,7 +163,7 @@ function mr_scholarship_form_shortcode_handler()
                 'dob_month_bs',
                 'dob_day_bs',
                 'address_district',
-                'address_municipality', // This will now contain the combined value
+                'municipality_name', // Municipality name from form
                 'address_ward',
                 'father_name',
                 'father_occupation',
@@ -198,6 +214,19 @@ function mr_scholarship_form_shortcode_handler()
 
             // Handle radio button for bank_name
             $data['bank_name'] = isset($_POST['bank_name']) ? sanitize_text_field($_POST['bank_name']) : null;
+            
+            // Process municipality data combination
+            if (isset($_POST['municipality_type']) && isset($_POST['municipality_name'])) {
+                $municipality_type = sanitize_text_field($_POST['municipality_type']);
+                $municipality_name = sanitize_text_field($_POST['municipality_name']);
+                if (!empty($municipality_name) && !empty($municipality_type)) {
+                    $data['address_municipality'] = $municipality_name . ' (' . $municipality_type . ')';
+                } else {
+                    $data['address_municipality'] = $municipality_name;
+                }
+            } else {
+                $data['address_municipality'] = null;
+            }
 
             // Handle file uploads
             $upload_dir = wp_upload_dir();
@@ -286,6 +315,7 @@ function mr_scholarship_form_shortcode_handler()
                     }
                 }
             }
+            } // Close duplicate check condition
         }
     }
 
@@ -300,21 +330,44 @@ function mr_scholarship_form_shortcode_handler()
             </div>
         <?php endif; ?>
 
-        <form id="mr-scholarship-form" method="post" enctype="multipart/form-data">
+        <form id="scholarshipForm" method="post" action="" enctype="multipart/form-data">
             <?php wp_nonce_field('mr_scholarship_form_action', 'mr_scholarship_nonce'); ?>
-
-            <!-- Personal Information -->
-            <div class="input-group">
-                <label for="name_nepali">१ नाम (देवनागरीमा) <span class="required">*</span>:</label>
-                <input type="text" id="name_nepali" name="name_nepali" required 
-                       value="<?php echo isset($_POST['name_nepali']) ? esc_attr($_POST['name_nepali']) : ''; ?>">
+            
+            <div class="header">
+                <h2>महेन्द्ररत्न बहुमुखी क्याम्पस, इलामको</h2>
+                <h3>क्याम्पस विद्यार्थी कल्याण तथा खेलकुद शाखा</h3>
             </div>
-
-            <div class="input-group">
-                <label for="name_english">२ नाम (अंग्रेजीमा) <span class="required">*</span>:</label>
-                <input type="text" id="name_english" name="name_english" required 
-                       value="<?php echo isset($_POST['name_english']) ? esc_attr($_POST['name_english']) : ''; ?>">
+            
+            <div class="recipient">
+                श्रीमान् क्याम्पस प्रमुख ज्यू,<br>
+                महेन्द्ररत्न बहुमुखी क्याम्पस, इलाम
             </div>
+            
+            <div class="subject">
+                विषयः गरीब तथा जेहेन्दार वा निरशुल्क छात्रवृत्ति सम्बन्धमा ।
+            </div>
+            
+            <div class="salutation">
+                महोदय,
+            </div>
+            
+            <p>
+                म यस क्याम्पसको देहायको विवरणमा रही अध्ययनरत छु । यस क्याम्पसद्वारा उपलब्ध गराईने छात्रवृत्तिका लागि आफूलाई
+                देहायको क्षेत्र वा वर्गमा योग्य ठानी यो निवेदन पेस गरेको छु ।
+            </p>
+
+            <div class="form-section personal-details">
+                <div class="input-group">
+                    <label for="name_nepali">१ विद्यार्थीको नामः- देवनागरीमा *:</label>
+                    <input type="text" id="name_nepali" name="name_nepali" required
+                        value="<?php echo isset($_POST['name_nepali']) ? esc_attr($_POST['name_nepali']) : ''; ?>">
+                </div>
+                
+                <div class="input-group">
+                    <label for="name_english">Name In: BLOCK LETTERS *:</label>
+                    <input type="text" id="name_english" name="name_english" required class="block-letters"
+                        value="<?php echo isset($_POST['name_english']) ? esc_attr($_POST['name_english']) : ''; ?>">
+                </div>
 
             <!-- Date of Birth -->
             <div class="input-group">

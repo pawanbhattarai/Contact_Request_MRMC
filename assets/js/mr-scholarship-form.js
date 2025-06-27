@@ -49,10 +49,17 @@ function handleMunicipalityTypeChange() {
  * Handle form submission with validation
  */
 function handleFormSubmission() {
-    const form = document.getElementById('mr-scholarship-form');
+    const form = document.getElementById('scholarshipForm');
     if (!form) return;
     
     form.addEventListener('submit', function(e) {
+        // Disable submit button immediately to prevent double submission
+        const submitBtn = document.getElementById('submitBtn');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.value = 'पेश गर्दै...';
+        }
+        
         // Add loading state
         this.classList.add('form-loading');
         
@@ -60,6 +67,12 @@ function handleFormSubmission() {
         if (!validateForm()) {
             e.preventDefault();
             this.classList.remove('form-loading');
+            
+            // Re-enable submit button if validation fails
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.value = 'Submit Application';
+            }
             return false;
         }
         
@@ -110,14 +123,21 @@ function validateForm() {
  */
 function processMunicipalityData() {
     const municipalityType = document.querySelector('input[name="municipality_type"]:checked');
-    const municipalityName = document.getElementById('address_municipality');
+    const municipalityName = document.querySelector('input[name="municipality_name"]');
     
-    if (municipalityType && municipalityName.value.trim()) {
-        // Create hidden input with combined value
+    if (municipalityType && municipalityName && municipalityName.value.trim()) {
+        // Create hidden input with combined value for database storage
         const combinedValue = `${municipalityName.value.trim()} (${municipalityType.value})`;
         
-        // Update the municipality name field value
-        municipalityName.value = combinedValue;
+        // Create a hidden input to store the combined value
+        let hiddenInput = document.querySelector('input[name="address_municipality"]');
+        if (!hiddenInput) {
+            hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'address_municipality';
+            document.getElementById('scholarshipForm').appendChild(hiddenInput);
+        }
+        hiddenInput.value = combinedValue;
     }
 }
 
