@@ -1,0 +1,31 @@
+<div class="input-group">
+                    <label>६ शैक्षिक भर्ना विवरण *:</label>
+                    <div class="academic-details">
+                        <span class="field-group">
+                            <label for="faculty">संकायः</label>
+                            <select id="faculty" name="faculty" required class="input-inline">
+                                <option value="">-- छान्नुहोस् --</option>
+                                <option value="व्यवस्थापन" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'व्यवस्थापन') ? 'selected' : ''; ?>>व्यवस्थापन</option>
+                                <option value="मानविकी" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'मानविकी') ? 'selected' : ''; ?>>मानविकी</option>
+                                <option value="शिक्षाशास्त्र" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'शिक्षाशास्त्र') ? 'selected' : ''; ?>>शिक्षाशास्त्र</option>
+                            </select>
+                        </span>
+                        <span class="field-group">
+                            <label for="ac_level">तहः</label>
+                            <select id="ac_level" name="ac_level" required class="input-inline">
+                                <option value="">-- छान्नुहोस् --</option>
+                                <option value="स्नातक" <?php echo (isset($_POST['ac_level']) && $_POST['ac_level'] == 'स्नातक') ? 'selected' : ''; ?>>स्नातक</option>
+                            </select>
+                        </span>
+                        <span class="field-group">
+                            <label for="ac_year">वर्षः</label>
+                            <select id="ac_year" name="ac_year" class="input-inline">
+                                <option value="">-- छान्नुहोस् --</option>
+                                <option value="पहिलो वर्ष" <?php echo (isset($_POST['ac_year']) && $_POST['ac_year'] == 'पहिलो वर्ष') ? 'selected' : ''; ?>>पहिलो वर्ष</option>
+                                <option value="दोस्रो वर्ष" <?php echo (isset($_POST['ac_year']) && $_POST['ac_year'] == 'दोस्रो वर्ष') ? 'selected' : ''; ?>>दोस्रो वर्ष</option>
+                                <option value="तेस्रो वर्ष" <?php echo (isset($_POST['ac_year']) && $_POST['ac_year'] == 'तेस्रो वर्ष') ? 'selected' : ''; ?>>तेस्रो वर्ष</option>
+                                <option value="चौथो वर्ष" <?php echo (isset($_POST['ac_year']) && $_POST['ac_year'] == 'चौथो वर्ष') ? 'selected' : ''; ?>>चौथो वर्ष</option>
+                            </select>
+                        </span>
+                    </div>
+                </div>
